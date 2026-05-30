@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Write to Yaazhan 💌 — Drop a Note for the Tiny Boss</title>
+  <meta name="description" content="Leave a note for Yaazhan. He'll read it when he's 5. We promise." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💌</text></svg>" />
+  <style>
+    /* Contact page extra decorations */
+    .contact-bg-glow {
+      position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse 55% 55% at 20% 35%, rgba(255,78,205,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 80% 70%, rgba(78,255,180,0.1) 0%, transparent 70%);
+    }
+    .envelope-hero {
+      font-size:clamp(5rem,18vw,14rem);
+      line-height:1; margin-bottom:1.5rem;
+      animation:envelopeWobble 3s ease-in-out infinite;
+      display:block;
+    }
+    @keyframes envelopeWobble {
+      0%,100%{ transform:rotate(-5deg) scale(1); }
+      50%{ transform:rotate(5deg) scale(1.06); }
+    }
+    .who-reads {
+      display:inline-flex; align-items:center; gap:0.6rem;
+      background:rgba(255,233,78,0.1); border:1px solid rgba(255,233,78,0.25);
+      color:var(--yellow); border-radius:100px;
+      padding:0.45rem 1.2rem; font-family:var(--font-hand);
+      font-size:0.95rem; font-weight:700; margin-bottom:2rem;
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+    @media(max-width:600px){ .form-row{ grid-template-columns:1fr; } }
+    .char-count {
+      text-align:right; font-size:0.75rem; opacity:0.35;
+      margin-top:0.3rem; font-family:var(--font-hand);
+    }
+    .wall-header {
+      display:flex; align-items:baseline; gap:1rem; margin-bottom:1.5rem;
+    }
+    .wall-header h2 { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,3rem); }
+    .wall-count {
+      background:var(--pink); color:#fff; font-family:var(--font-display);
+      font-size:0.8rem; padding:0.2rem 0.7rem; border-radius:100px;
+    }
+    .wall-empty {
+      background:var(--card-bg); border:1px dashed var(--border);
+      border-radius:20px; padding:3rem; text-align:center;
+      font-family:var(--font-hand); font-size:1.1rem; opacity:0.4;
+    }
+    .form-section-title {
+      font-family:var(--font-display); font-size:clamp(1.5rem,4vw,2.5rem);
+      margin-bottom:0.5rem; color:var(--yellow);
+    }
+    .form-section-sub {
+      font-family:var(--font-hand); font-size:1rem; opacity:0.55; margin-bottom:2rem;
+    }
+    /* Sticky note visual on wall cards */
+    .message-card:nth-child(3n) { --mc-rot: -1.5deg; }
+    .message-card:nth-child(3n+1) { --mc-rot: 1deg; }
+    .message-card:nth-child(3n+2) { --mc-rot: -0.8deg; }
+    .message-card { transform: rotate(var(--mc-rot, 0deg)); }
+    .message-card:hover { transform:rotate(0) translateY(-5px); }
+
+    /* Page-level hero override */
+    .contact-page-hero {
+      min-height:55vh; display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center; padding:9rem 2rem 4rem;
+      position:relative; overflow:hidden;
+    }
+  </style>
+</head>
+<body data-page="contact">
+
+  <div class="noise"></div>
+  <div class="cursor"></div>
+  <div class="cursor-trail"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Yaazhan</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="moments.html">Moments</a></li>
+      <li><a href="family.html">Family</a></li>
+      <li><a href="contact.html" class="active">Write to Me</a></li>
+    </ul>
+    <button class="nav-menu-btn" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- ====== MARQUEE ====== -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>💌 Drop a note for the tiny boss</span>
+      <span>📬 He'll read this when he's 5, promise</span>
+      <span>🕰️ Time capsule vibes only</span>
+      <span>✍️ Say something sweet (or funny)</span>
+      <span>🌟 Every note will be saved forever</span>
+      <span>💌 Drop a note for the tiny boss</span>
+      <span>📬 He'll read this when he's 5, promise</span>
+      <span>🕰️ Time capsule vibes only</span>
+      <span>✍️ Say something sweet (or funny)</span>
+      <span>🌟 Every note will be saved forever</span>
+    </div>
+  </div>
+
+  <!-- ====== HERO ====== -->
+  <div class="contact-page-hero">
+    <div class="contact-bg-glow"></div>
+    <span class="envelope-hero">💌</span>
+    <div class="who-reads">📅 Yaazhan reads this at age 5</div>
+    <h1 style="font-family:var(--font-display); font-size:clamp(3rem,10vw,8rem); line-height:1; background:linear-gradient(130deg,var(--yellow) 0%,var(--pink) 55%,var(--mint) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1rem; position:relative;">
+      Write to Yaazhan
+    </h1>
+    <p style="font-family:var(--font-hand); font-size:1.1rem; opacity:0.55; transform:rotate(-1deg); display:inline-block; position:relative;">
+      leave a note. a wish. a joke. a memory. anything at all.
+    </p>
+  </div>
+
+  <!-- ====== MAIN SECTION ====== -->
+  <section class="section" style="padding-top:0;">
+
+    <!-- Time capsule note -->
+    <div class="time-capsule-note anim">
+      <span class="tc-icon">🕰️</span>
+      <div class="tc-text">
+        <strong>This is a time capsule for Yaazhan.</strong>
+        <p>
+          Leave him a wish, a funny prediction, a life lesson, a memory you want him to have, or just say hello!
+          Every message is saved right here — to be read by Yaazhan when he grows up.
+          There are no wrong answers. There is no wrong message. Just speak to the tiny boss.
+        </p>
+      </div>
+    </div>
+
+    <!-- ====== FORM ====== -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;" class="contact-layout">
+
+      <!-- Left: form -->
+      <div>
+        <div class="section-label">Leave your note</div>
+        <div class="form-section-title">What do you want<br>Yaazhan to know? 🤔</div>
+        <p class="form-section-sub">be real. be funny. be you.</p>
+
+        <div class="contact-form-wrap anim">
+          <form id="contact-form" novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="f-name">Your Name ✍️</label>
+                <input class="form-input" id="f-name" type="text" placeholder="e.g. Thatha, Appa, Meena Aunty…" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-rel">You are… 🤝</label>
+                <select class="form-select" id="f-rel">
+                  <option value="">Pick one…</option>
+                  <option>Appa 👨</option>
+                  <option>Amma 👩</option>
+                  <option>Thatha 👴</option>
+                  <option>Aaya 👵</option>
+                  <option>Appuchi 👴</option>
+                  <option>Ammayie 👵</option>
+                  <option>Mama 👨</option>
+                  <option>Athai 👩</option>
+                  <option>Chitappa🙌</option>
+                  <option>Chithi🙌</option>
+                  <option>A family friend 💛</option>
+                  <option>Future best friend 🤜🤛</option>
+                  <option>Someone who loves Yaazhan ❤️</option>
+                  <option>A mystery person 🕵️</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="f-msg">Your Message for Yaazhan 💬</label>
+              <textarea class="form-textarea" id="f-msg" placeholder="Tell him something! A wish, a memory, a life lesson, a prediction, a joke… anything goes." maxlength="500" required></textarea>
+              <div class="char-count"><span id="char-left">500</span> characters left</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Pick your vibe 🎨</label>
+              <div class="emoji-picker">
+                <button type="button" class="ep-btn picked" data-emoji="💌">💌</button>
+                <button type="button" class="ep-btn" data-emoji="🌟">🌟</button>
+                <button type="button" class="ep-btn" data-emoji="🎉">🎉</button>
+                <button type="button" class="ep-btn" data-emoji="💛">💛</button>
+                <button type="button" class="ep-btn" data-emoji="🤣">🤣</button>
+                <button type="button" class="ep-btn" data-emoji="🥹">🥹</button>
+                <button type="button" class="ep-btn" data-emoji="🚀">🚀</button>
+                <button type="button" class="ep-btn" data-emoji="🌈">🌈</button>
+                <button type="button" class="ep-btn" data-emoji="🍼">🍼</button>
+                <button type="button" class="ep-btn" data-emoji="❤️">❤️</button>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              💌 Send it to the Tiny Boss
+            </button>
+
+          </form>
+
+          <!-- Success state -->
+          <div class="success-msg" id="success-msg">
+            <span class="s-icon">🎉</span>
+            Your note has been saved for Yaazhan!<br />
+            <span style="font-family:var(--font-hand); font-size:1rem; opacity:0.6; display:block; margin-top:0.5rem;">
+              He's going to love reading this one day.
+            </span>
+            <button onclick="window.location.reload()" style="margin-top:1.5rem; background:transparent; border:2px solid var(--mint); color:var(--mint); border-radius:100px; padding:0.6rem 1.5rem; font-family:var(--font-display); cursor:pointer; font-size:0.9rem;">
+              Leave another note ↩
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: what to write -->
+      <div>
+        <div class="section-label">Need inspiration?</div>
+        <div class="form-section-title">Things you could<br>tell him… 💭</div>
+        <p class="form-section-sub">literally anything works. no judgement here.</p>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.5rem; display:flex; gap:1rem;" class="anim">
+            <span style="font-size:1.8rem; flex-shrink:0;">🌟</span>
+            <div>
+              <strong style="font-family:var(--font-display); color:var(--yellow); font-size:1rem; display:block; margin-bottom:0.3rem;">A Wish</strong>
+              <p style="font-size:0.88rem; opacity:0.65; line-height:1.6;">"I wish you a life full of ____ and very few ____. Also please sleep."</p>
+            </div>
+          </div>
+          <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.5rem; display:flex; gap:1rem;" class="anim">
+            <span style="font-size:1.8rem; flex-shrink:0;">🔮</span>
+            <div>
+              <strong style="font-family:var(--font-display); color:var(--pink); font-size:1rem; display:block; margin-bottom:0.3rem;">A Prediction</strong>
+              <p style="font-size:0.88rem; opacity:0.65; line-height:1.6;">"When you're 5, you're going to love ____. Trust me. I called it."</p>
+            </div>
+          </div>
+          <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.5rem; display:flex; gap:1rem;" class="anim">
+            <span style="font-size:1.8rem; flex-shrink:0;">🎓</span>
+            <div>
+              <strong style="font-family:var(--font-display); color:var(--mint); font-size:1rem; display:block; margin-bottom:0.3rem;">Life Advice</strong>
+              <p style="font-size:0.88rem; opacity:0.65; line-height:1.6;">"The one thing I want you to always remember is ____."</p>
+            </div>
+          </div>
+          <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.5rem; display:flex; gap:1rem;" class="anim">
+            <span style="font-size:1.8rem; flex-shrink:0;">📖</span>
+            <div>
+              <strong style="font-family:var(--font-display); color:var(--yellow); font-size:1rem; display:block; margin-bottom:0.3rem;">A Memory</strong>
+              <p style="font-size:0.88rem; opacity:0.65; line-height:1.6;">"The moment I first saw you, I felt ____. You should know that."</p>
+            </div>
+          </div>
+          <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:1.5rem; display:flex; gap:1rem;" class="anim">
+            <span style="font-size:1.8rem; flex-shrink:0;">🤣</span>
+            <div>
+              <strong style="font-family:var(--font-display); color:var(--purple); font-size:1rem; display:block; margin-bottom:0.3rem;">A Joke</strong>
+              <p style="font-size:0.88rem; opacity:0.65; line-height:1.6;">"Why did the baby cross the road? To get to the milk, obviously."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====== MESSAGE WALL ====== -->
+    <div style="margin-top:6rem;">
+      <div class="glow-divider" style="margin-bottom:3rem;"></div>
+      <div class="wall-header">
+        <div class="section-label" style="margin-bottom:0;">Notes so far</div>
+      </div>
+      <h2 style="font-family:var(--font-display); font-size:clamp(2rem,5vw,4rem); margin-bottom:0.5rem;">
+        Yaazhan's <span style="color:var(--pink)">Inbox</span> 📬
+      </h2>
+      <p style="font-family:var(--font-hand); font-size:1rem; opacity:0.5; margin-bottom:2rem; transform:rotate(-1deg); display:inline-block;">saved on this device — notes stay here for him to read one day</p>
+
+      <div id="message-wall" class="message-wall">
+        <!-- populated by script.js -->
+      </div>
+      <div id="wall-empty-state" class="wall-empty" style="display:none;">
+        💌 No notes yet! Be the first to leave one for Yaazhan.
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="footer-logo">Yaazhan</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="moments.html">Moments</a></li>
+      <li><a href="family.html">Family</a></li>
+      <li><a href="contact.html">Write to Me</a></li>
+    </ul>
+    <p class="footer-text">Est. 2026 <br />Built for Yaazhan, tiny boss of the house.</p>
+    <div class="footer-hearts">💛 🩷 💚 💙</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // char counter
+    const msgEl    = document.getElementById('f-msg');
+    const leftEl   = document.getElementById('char-left');
+    const emptyEl  = document.getElementById('wall-empty-state');
+    const wallEl   = document.getElementById('message-wall');
+    if (msgEl && leftEl) {
+      msgEl.addEventListener('input', () => { leftEl.textContent = 500 - msgEl.value.length; });
+    }
+    // show empty state if wall has no kids
+    if (wallEl && emptyEl) {
+      setTimeout(() => {
+        if (wallEl.children.length === 0) emptyEl.style.display = 'block';
+      }, 100);
+    }
+  </script>
+  <style>
+    @media(max-width:900px){ .contact-layout{ grid-template-columns:1fr !important; gap:3rem !important; } }
+  </style>
+</body>
+</html>
