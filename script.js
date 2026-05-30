@@ -143,26 +143,55 @@ if (document.body.dataset.page === 'home') setTimeout(launchConfetti, 500);
   try { messages = JSON.parse(localStorage.getItem('yaazhan_notes') || '[]'); } catch(e){}
   renderWall(messages);
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const name = form.querySelector('#f-name').value.trim();
-    const rel  = form.querySelector('#f-rel').value;
-    const msg  = form.querySelector('#f-msg').value.trim();
-    if (!name || !msg) return;
+  form.addEventListener('submit', async e => {
+  e.preventDefault();
 
-    const entry = {
-      name, rel, msg,
-      emoji: pickedEmoji,
-      date: new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
-    };
-    messages.unshift(entry);
-    try { localStorage.setItem('yaazhan_notes', JSON.stringify(messages.slice(0,50))); } catch(e){}
-    renderWall(messages);
+  const name = form.querySelector('#f-name').value.trim();
+  const rel  = form.querySelector('#f-rel').value;
+  const msg  = form.querySelector('#f-msg').value.trim();
 
-    form.style.display = 'none';
-    successEl.style.display = 'block';
-    setTimeout(launchConfetti, 200);
+  if (!name || !msg) return;
+
+  const entry = {
+    name,
+    rel,
+    msg,
+    emoji: pickedEmoji,
+    date: new Date().toLocaleDateString('en-IN', {
+      day:'numeric',
+      month:'short',
+      year:'numeric'
+    })
+  };
+
+  // Save locally (your existing feature)
+  messages.unshift(entry);
+  localStorage.setItem(
+    'yaazhan_notes',
+    JSON.stringify(messages.slice(0,50))
+  );
+  renderWall(messages);
+
+  // Send to Netlify
+  const formData = new URLSearchParams();
+  formData.append('form-name', 'yaazhan-notes');
+  formData.append('name', name);
+  formData.append('relationship', rel);
+  formData.append('message', msg);
+  formData.append('emoji', pickedEmoji);
+
+  await fetch('/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formData.toString()
   });
+
+  form.style.display = 'none';
+  successEl.style.display = 'block';
+  setTimeout(launchConfetti, 200);
+});
 
   function renderWall(msgs) {
     if (!wall) return;
