@@ -147,16 +147,40 @@
         <p class="form-section-sub">be real. be funny. be you.</p>
 
         <div class="contact-form-wrap anim">
-          <form id="contact-form" novalidate>
+          <form
+  id="contact-form"
+  name="yaazhan-notes"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  novalidate
+>
+  <input type="hidden" name="form-name" value="yaazhan-notes">
+
+  <p hidden>
+    <input name="bot-field">
+  </p>
 
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="f-name">Your Name ✍️</label>
-                <input class="form-input" id="f-name" type="text" placeholder="e.g. Thatha, Appa, Meena Aunty…" maxlength="50" required />
+                <input
+  class="form-input"
+  id="f-name"
+  name="name"
+  type="text"
+  placeholder="e.g. Thatha, Appa, Meena Aunty…"
+  maxlength="50"
+  required
+/>
               </div>
               <div class="form-group">
                 <label class="form-label" for="f-rel">You are… 🤝</label>
-                <select class="form-select" id="f-rel">
+              <select
+  class="form-select"
+  id="f-rel"
+  name="relationship"
+>
                   <option value="">Pick one…</option>
                   <option>Appa 👨</option>
                   <option>Amma 👩</option>
@@ -178,12 +202,20 @@
 
             <div class="form-group">
               <label class="form-label" for="f-msg">Your Message for Yaazhan 💬</label>
-              <textarea class="form-textarea" id="f-msg" placeholder="Tell him something! A wish, a memory, a life lesson, a prediction, a joke… anything goes." maxlength="500" required></textarea>
+              <textarea
+  class="form-textarea"
+  id="f-msg"
+  name="message"
+  placeholder="Tell him something! A wish, a memory, a life lesson, a prediction, a joke… anything goes."
+  maxlength="500"
+  required
+></textarea>
               <div class="char-count"><span id="char-left">500</span> characters left</div>
             </div>
 
             <div class="form-group">
               <label class="form-label">Pick your vibe 🎨</label>
+              <input type="hidden" id="f-emoji" name="emoji" value="💌">
               <div class="emoji-picker">
                 <button type="button" class="ep-btn picked" data-emoji="💌">💌</button>
                 <button type="button" class="ep-btn" data-emoji="🌟">🌟</button>
