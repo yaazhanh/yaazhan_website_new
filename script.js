@@ -33,6 +33,58 @@ if (supportsFinePointer && cursor) {
   });
 })();
 
+/* ====== DESKTOP NAV AUTO-HIDE ====== */
+(function() {
+  const nav = document.querySelector('nav');
+  const desktopNav = window.matchMedia('(min-width: 769px) and (hover: hover) and (pointer: fine)');
+  if (!nav) return;
+
+  let hideTimer;
+  let lastScrollY = window.scrollY;
+
+  function showNav() {
+    nav.classList.remove('nav-hidden');
+  }
+
+  function scheduleHide() {
+    clearTimeout(hideTimer);
+    if (!desktopNav.matches) {
+      showNav();
+      return;
+    }
+    hideTimer = setTimeout(() => {
+      if (!nav.matches(':hover') && !nav.matches(':focus-within')) {
+        nav.classList.add('nav-hidden');
+      }
+    }, 1800);
+  }
+
+  function revealThenHide() {
+    showNav();
+    scheduleHide();
+  }
+
+  window.addEventListener('mousemove', e => {
+    if (!desktopNav.matches) return;
+    if (e.clientY <= 90) revealThenHide();
+  });
+
+  window.addEventListener('scroll', () => {
+    if (!desktopNav.matches) return;
+    const currentY = window.scrollY;
+    if (currentY < lastScrollY || currentY < 24) revealThenHide();
+    else scheduleHide();
+    lastScrollY = currentY;
+  }, { passive:true });
+
+  nav.addEventListener('mouseenter', showNav);
+  nav.addEventListener('mouseleave', scheduleHide);
+  nav.addEventListener('focusin', showNav);
+  nav.addEventListener('focusout', scheduleHide);
+  desktopNav.addEventListener('change', revealThenHide);
+  scheduleHide();
+})();
+
 /* ====== MOBILE NAV ====== */
 const menuBtn = document.querySelector('.nav-menu-btn');
 const navList = document.querySelector('.nav-links');
