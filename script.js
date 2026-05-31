@@ -7,7 +7,12 @@
 const cursor  = document.querySelector('.cursor');
 const trail   = document.querySelector('.cursor-trail');
 let mx = 0, my = 0;
-if (cursor) {
+const supportsFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (!supportsFinePointer) {
+  cursor?.remove();
+  trail?.remove();
+}
+if (supportsFinePointer && cursor) {
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     cursor.style.left = mx + 'px';
@@ -32,14 +37,18 @@ if (cursor) {
 const menuBtn = document.querySelector('.nav-menu-btn');
 const navList = document.querySelector('.nav-links');
 if (menuBtn && navList) {
+  menuBtn.setAttribute('aria-expanded', 'false');
   menuBtn.addEventListener('click', () => {
     navList.classList.toggle('open');
-    menuBtn.textContent = navList.classList.contains('open') ? '✕' : '☰';
+    const isOpen = navList.classList.contains('open');
+    menuBtn.textContent = isOpen ? '✕' : '☰';
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
   });
   navList.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       navList.classList.remove('open');
       menuBtn.textContent = '☰';
+      menuBtn.setAttribute('aria-expanded', 'false');
     });
   });
 }
@@ -68,14 +77,16 @@ if (floats.length) {
   `;
   document.head.appendChild(style);
 
-  document.addEventListener('mousemove', e => {
-    const cx = (e.clientX / window.innerWidth  - 0.5) * 2;
-    const cy = (e.clientY / window.innerHeight - 0.5) * 2;
-    floats.forEach((el, i) => {
-      const d = ((i % 5) + 1) * 6;
-      el.style.transform = `translate(${cx*d}px,${cy*d}px) rotate(${cx*14}deg)`;
+  if (supportsFinePointer) {
+    document.addEventListener('mousemove', e => {
+      const cx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+      floats.forEach((el, i) => {
+        const d = ((i % 5) + 1) * 6;
+        el.style.transform = `translate(${cx*d}px,${cy*d}px) rotate(${cx*14}deg)`;
+      });
     });
-  });
+  }
 }
 
 /* ====== SCROLL ANIMATION ====== */
